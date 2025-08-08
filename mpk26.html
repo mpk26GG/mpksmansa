@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MPK 26</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: black;
+      font-family: Arial, sans-serif;
+    }
+
+    /* VIDEO INTRO */
+    #introContainer {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #introVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #introText {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 3em;
+      text-align: center;
+      z-index: 2;
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    /* SLIDESHOW */
+    #slideshow {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      background-color: black;
+    }
+
+    #bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.1;
+      z-index: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #quote {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2em;
+      z-index: 1;
+      text-align: center;
+      text-shadow: 1px 1px 6px #000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- VIDEO INTRO -->
+  <div id="introContainer">
+    <video id="introVideo" autoplay muted>
+      <source src="c:\Users\Atap Eka\Downloads\vidio1.mp4" type="video/mp4" />
+      Browser kamu tidak mendukung video.
+    </video>
+    <div id="introText">Terima Kasih</div>
+  </div>
+
+  <!-- SLIDESHOW -->
+  <div id="slideshow">
+    <img src="c:\Users\Atap Eka\Downloads\foto2.jpeg" class="fade" id="bg" />
+    <div id="quote">mpk smansa.</div>
+  </div>
+
+  <!-- MUSIC -->
+  <audio autoplay loop controls>
+    <source src="lagu.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <script>
+    const quotes = [
+      "Terima kasih,telah memberiku kesempatan.",
+      "Aku tidak menyesal masuk mpk.....",
+      "Aku akan mengingatnya!",
+      "Sampai jumpa, lagi mpk26."
+    ];
+
+    const images = ["foto2.jpeg", "foto3.jpeg", "foto4.jpeg", "foto1.jpeg"];
+
+    let index = 0;
+
+    const quoteElem = document.getElementById("quote");
+    const bgElem = document.getElementById("bg");
+
+    // Setelah video selesai
+    const introVideo = document.getElementById("introVideo");
+    introVideo.onended = function () {
+      document.getElementById("introContainer").style.display = "none";
+      document.getElementById("slideshow").style.display = "block";
+
+      // Mulai slideshow
+      setInterval(() => {
+        index = (index + 1) % quotes.length;
+        quoteElem.textContent = quotes[index];
+        bgElem.style.opacity = 0;
+        setTimeout(() => {
+          bgElem.src = images[index];
+          bgElem.style.opacity = 0.1;
+        }, 1000);
+      }, 5000);
+    };
+  </script>
+
+</body>
+</html>
